@@ -1,4 +1,4 @@
-for i in 1..20
+(1..20).each do |i|
 
   if i % 15 == 0
     puts "FizzBuzz"
@@ -11,4 +11,3 @@ for i in 1..20
   end
   
 end
-
