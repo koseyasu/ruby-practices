@@ -1,0 +1,27 @@
+# frozen_string_literal: true
+
+DISPLAY_MAX_COLUMNS = 3
+
+def list_files
+  Dir.glob('*')
+end
+
+def round_to_specified_size(length, round_num)
+  ((length + round_num) / round_num) * round_num
+end
+
+def build_columns(lists, columns)
+  display_rows = (lists.length.to_f / columns).ceil
+  lists.fill(nil, lists.length, display_rows * columns - lists.length)
+  lists.each_slice(display_rows).to_a.transpose
+end
+
+def display_list_files
+  files = list_files
+  max_length = files.map(&:length).max
+  build_columns(list_files, DISPLAY_MAX_COLUMNS).each do |row|
+    puts row.map { |f| f.to_s.ljust(round_to_specified_size(max_length, 8)) }.join
+  end
+end
+
+display_list_files
