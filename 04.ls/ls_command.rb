@@ -12,15 +12,17 @@ end
 
 def build_columns(lists, columns)
   display_rows = (lists.length.to_f / columns).ceil
-  lists.fill(nil, lists.length, display_rows * columns - lists.length)
+  lists.fill('', lists.length, display_rows * columns - lists.length)
   lists.each_slice(display_rows).to_a.transpose
 end
 
 def display_list_files
   files = list_files
+  return if files.empty?
+
   max_length = files.map(&:length).max
-  build_columns(list_files, DISPLAY_MAX_COLUMNS).each do |row|
-    puts row.map { |f| f.to_s.ljust(round_to_specified_size(max_length, 8)) }.join
+  build_columns(files, DISPLAY_MAX_COLUMNS).each do |row|
+    puts row.map { |f| f.ljust(round_to_specified_size(max_length, 8)) }.join
   end
 end
 
