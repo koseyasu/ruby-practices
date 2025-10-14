@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'optparse'
-
 DISPLAY_MAX_COLUMNS = 3
 
 def list_files(params)
