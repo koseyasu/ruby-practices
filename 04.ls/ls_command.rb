@@ -2,8 +2,8 @@
 
 DISPLAY_MAX_COLUMNS = 3
 
-def list_files
-  Dir.glob('*')
+def list_files(params)
+  params.include?('-a') ? Dir.entries('.').sort : Dir.glob('*')
 end
 
 def round_to_specified_size(length, round_num)
@@ -16,8 +16,8 @@ def build_columns(lists, columns)
   lists.each_slice(display_rows).to_a.transpose
 end
 
-def display_list_files
-  files = list_files
+def display_list_files(params)
+  files = list_files(params)
   return if files.empty?
 
   max_length = files.map(&:length).max
@@ -26,4 +26,5 @@ def display_list_files
   end
 end
 
-display_list_files
+params = ARGV
+display_list_files(params)
