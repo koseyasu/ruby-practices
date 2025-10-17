@@ -3,7 +3,8 @@
 DISPLAY_MAX_COLUMNS = 3
 
 def list_files(params)
-  params.include?('-a') ? Dir.entries('.').sort : Dir.glob('*')
+  option_a_list = params.include?('-a') ? Dir.entries('.').sort : Dir.glob('*')
+  params.include?('-r') ? option_a_list.reverse : option_a_list
 end
 
 def round_to_specified_size(length, round_num)
